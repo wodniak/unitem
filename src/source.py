@@ -1,8 +1,16 @@
+#!/usr/bin/env python
+"""
+@author: Grzegorz Wozniak
+@date: 20.12.2022
+"""
+
 import numpy as np
+
 
 class Source:
     def __init__(self, source_shape: tuple):
         self._source_shape: tuple = source_shape
+
     def get_data(self) -> np.ndarray:
         rows, cols, channels = self._source_shape
         return np.random.randint(

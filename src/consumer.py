@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+"""
+@author: Grzegorz Wozniak
+@date: 20.12.2022
+"""
+
 import os
 import logging
 
-from source import Source
-from time import sleep
 from cv2 import resize, medianBlur, imwrite
 from threading import Thread
 
@@ -32,15 +36,17 @@ class Consumer(object):
         if self.thread:
             self.thread.join()
 
-    def is_running_thread(self):
+    def is_running_thread(self) -> bool:
         return self.is_running
 
-    def stop(self):
+    def stop(self) -> None:
         self.is_running = False
         if self.thread:
             self.thread.join()
 
-    def consume_thread(self):
+    def consume_thread(self) -> None:
+        """ Consumer thread, takes images from the Queue A, process them, and put on Queue B.
+            Once the self.max_frames are processed, save all images from Queue B."""
         while self.is_running:
             logging.info(f"Count: {self.frames_cnt}")
             image = QUEUE_A.get()
@@ -55,7 +61,7 @@ class Consumer(object):
             if self.frames_cnt >= self.max_frames:
                 self.save_frames_and_exit()
 
-    def save_frames_and_exit(self):
+    def save_frames_and_exit(self) -> None:
         if not os.path.exists(self.dir):
             os.makedirs(self.dir)
 

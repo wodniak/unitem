@@ -37,7 +37,6 @@ ARG DEBUG=false
 RUN poetry install $(test ! $DEBUG && echo "--no-dev")
 
 FROM base as development
-ENV FASTAPI_ENV=development
 WORKDIR $PYSETUP_PATH
 
 COPY --from=builder $POETRY_HOME $POETRY_HOME
@@ -46,6 +45,3 @@ COPY --from=builder $PYSETUP_PATH $PYSETUP_PATH
 RUN poetry install
 COPY . /app
 WORKDIR /app
-
-# ENTRYPOINT ["/app/docker/entrypoint.sh"]
-# CMD ["uvicorn", "--reload", "main:app"]

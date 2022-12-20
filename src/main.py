@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+"""
+@author: Grzegorz Wozniak
+@date: 20.12.2022
+"""
+
 from time import sleep
 
 from producer import Producer
