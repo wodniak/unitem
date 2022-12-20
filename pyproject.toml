@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "unitem"
+version = "0.1.0"
+description = ""
+authors = ["Grzegorz"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+opencv-python = "^4.6.0.66"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
